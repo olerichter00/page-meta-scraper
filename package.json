@@ -1,0 +1,53 @@
+{
+  "name": "page-meta-scraper",
+  "description": "A page metadata scraper",
+  "repository": "https://github.com/olerichter00/page-meta-scraper.git",
+  "homepage": "https://github.com/olerichter00/page-meta-scraper.git",
+  "keywords": [
+    "meta",
+    "page",
+    "metadata",
+    "scraper"
+  ],
+  "author": "Ole Richter <ole.richter91@gmail.com>",
+  "version": "0.0.1",
+  "files": [
+    "lib/*"
+  ],
+  "main": "lib/pageMetaScraper.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "yarn run build && jest",
+    "test:watch": "jest --watch",
+    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "prepare": "yarn test && yarn run build"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-typescript",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-transform-runtime"
+    ],
+    "presets": [
+      "@babel/preset-typescript",
+      "@babel/preset-env"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/plugin-transform-typescript": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/cheerio": "^0.22.22",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.2"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3"
+  }
+}

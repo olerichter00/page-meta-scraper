@@ -1,7 +1,10 @@
 {
   "name": "page-meta-scraper",
   "description": "A page metadata scraper",
-  "repository": "https://github.com/olerichter00/page-meta-scraper.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olerichter00/page-meta-scraper"
+  },
   "homepage": "https://github.com/olerichter00/page-meta-scraper.git",
   "keywords": [
     "meta",
@@ -10,28 +13,20 @@
     "scraper"
   ],
   "author": "Ole Richter <ole.richter91@gmail.com>",
-  "version": "0.0.1",
-  "files": [
-    "lib/*"
-  ],
-  "main": "lib/index.js",
+  "version": "0.1.1",
+  "main": "dist/index.js",
+  "umd:main": "dist/page-meta-scraper.umd.production.js",
+  "module": "dist/page-meta-scraper.esm.js",
+  "typings": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "test": "yarn run build && jest",
-    "test:watch": "jest --watch",
-    "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "prepare": "yarn test && yarn run build"
-  },
-  "babel": {
-    "plugins": [
-      "@babel/plugin-transform-typescript",
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-transform-runtime"
-    ],
-    "presets": [
-      "@babel/preset-typescript",
-      "@babel/preset-env"
-    ]
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --env=jsdom",
+    "test:watch": "tsdx test --watch --env=jsdom",
+    "version:alpha": "npm version prerelease --preid=alpha",
+    "publish:alpha": "npm publish --tag alpha",
+    "prepublishOnly": "tsdx build"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
@@ -45,6 +40,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",
+    "tsdx": "^0.14.1",
     "typescript": "^4.1.2"
   },
   "dependencies": {

@@ -3,29 +3,14 @@ import fetchImagesFromUnsplash from '../clients/unsplashSearchApiClient'
 import { getContent, getSrc, normalizeUrl } from '../utils/helper'
 import config from '../config'
 
-const EXCLUDE_KEYWORDS = [
-  'ask',
-  'show',
-  'hn',
-  'the',
-  'a',
-  'that',
-  'this',
-  'as',
-  'and',
-  'or',
-  'for',
-  'in',
-  'out',
-  'new',
-  'i',
-]
+/* prettier-ignore */
+const EXCLUDE_KEYWORDS = ['ask', 'show', 'hn', 'the', 'a', 'that', 'this', 'as', 'and', 'or', 'for', 'in', 'out', 'new', 'i']
 
 type SelectorStrategy = [
   string,
   (element: cheerio.Root, selector: string) => string | undefined | (string | undefined)[],
 ]
-type ServiceStrategy = [string[], (keywords: string[]) => Promise<string[]>]
+type FallbackStrategy = [string[], (keywords: string[]) => Promise<string[]>]
 
 export default class MetaImageScraper {
   private page: cheerio.Root
@@ -49,7 +34,9 @@ export default class MetaImageScraper {
 
     if (imageUrls.length >= 2) return imageUrls.slice(0, this.MAX_IMAGES)
 
-    for (const strategy of this.fallbackStrategies) {
+    for (const strategyName of config.imageFallbackStrategies) {
+      const strategy = this.fallbackStrategies[strategyName]
+
       imageUrls.push(...(await this.fallbackImages(strategy)))
 
       if (imageUrls.length >= 1) return imageUrls.slice(0, this.MAX_IMAGES)
@@ -73,7 +60,7 @@ export default class MetaImageScraper {
     return []
   }
 
-  private async fallbackImages(strategy: ServiceStrategy): Promise<string[]> {
+  private async fallbackImages(strategy: FallbackStrategy): Promise<string[]> {
     try {
       const [keywords, handler] = strategy
 
@@ -103,8 +90,8 @@ export default class MetaImageScraper {
     ['img[src]:not([aria-hidden="true"])', getSrc],
   ]
 
-  private fallbackStrategies: ServiceStrategy[] = [
-    [this.keywords, fetchImagesFromSearch],
-    [this.keywords, fetchImagesFromUnsplash],
-  ]
+  private fallbackStrategies: { [key: string]: FallbackStrategy } = {
+    contextualweb: [this.keywords, fetchImagesFromSearch],
+    unsplash: [this.keywords, fetchImagesFromUnsplash],
+  }
 }

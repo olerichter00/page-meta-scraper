@@ -4,30 +4,12 @@ import MetaImageScraper from './scraper/metaImageScraper'
 import MetaDescriptionScraper from './scraper/metaDescriptionScraper'
 import MetaTitleScraper from './scraper/metaTitleScraper'
 import MetaFaviconScraper from './scraper/metaFaviconScraper'
-import config, { Config } from './config'
 
 type Metadata = {
   title?: string
   description?: string
   imageUrls?: string[]
   favicon?: string
-}
-
-export const configure = (params: Config) => {
-  Object.assign(config, params)
-}
-
-export const scrape = async (url: string, keywords: string[], fetcher: Function = fetch) => {
-  const metadataScraper = new PageMetaScraper(url, keywords, fetcher)
-
-  await metadataScraper.loadPage()
-
-  return await metadataScraper.scrape()
-}
-
-export default {
-  configure: configure,
-  scrape: scrape,
 }
 
 export class PageMetaScraper {

@@ -23,18 +23,9 @@ yarn add page-meta-scraper
 ```javascript
 import pageMetaScraper from 'page-meta-scraper'
 
-pageMetaScraper.configure({
-  unsplashBaseUrl: '',
-  unsplashClientId: '',
-  xRapidapiHost: '',
-  xRapidapiKey: '',
-  imageSearchBaseUrl: '',
-})
-
 const url = 'https://example.com'
-const keywords = ['example', 'key', 'words']
 
-const metadata = async () => pageMetaScraper.scrape(url, keywords)
+const metadata = async () => pageMetaScraper.scrape(url)
 
 // {
 //   title: 'page title',
@@ -46,7 +37,24 @@ const metadata = async () => pageMetaScraper.scrape(url, keywords)
 
 ### Fallback image APIs
 
-Since some pages don't show any images, [ContextualWeb Image Search API](https://contextualweb.io/image-search-api/) and [Unsplash Image API](https://unsplash.com/developers) can be used as fallback strategies.
+Since some pages don't show any images, [ContextualWeb Image Search API](https://contextualweb.io/image-search-api/) and [Unsplash Image API](https://unsplash.com/developers) can be used as fallback strategies. Both strategies have to be configured and keywords have to be provided to search for images:
+
+```javascript
+pageMetaScraper.configure({
+  imageFallbackStrategies: ['contextualweb', 'unsplash'],
+
+  unsplashBaseUrl: '',
+  unsplashClientId: '',
+  xRapidapiHost: '',
+  xRapidapiKey: '',
+  imageSearchBaseUrl: '',
+})
+
+const url = 'https://example.com'
+const keywords = ['example', 'key', 'words']
+
+const metadata = async () => pageMetaScraper.scrape(url, keywords)
+```
 
 **ContextualWeb Image Search API**
 

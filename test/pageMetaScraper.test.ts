@@ -1,4 +1,4 @@
-import pageMetaScraper from '../lib/pageMetaScraper'
+import pageMetaScraper from '../lib'
 import fs from 'fs'
 
 const fetcherMock = () => ({

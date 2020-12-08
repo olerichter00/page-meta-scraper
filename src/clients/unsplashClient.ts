@@ -13,7 +13,7 @@ type JsonResponse = {
   }[]
 }
 
-const fetchImagesFromSearch = async (keywords: string[]): Promise<string[]> => {
+const unsplashClient = async (keywords: string[]): Promise<string[]> => {
   const params: Params = {
     query: keywords.join(' '),
   }
@@ -33,4 +33,4 @@ const fetchImagesFromSearch = async (keywords: string[]): Promise<string[]> => {
   return images
 }
 
-export default fetchImagesFromSearch
+export default unsplashClient

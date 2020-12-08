@@ -1,9 +1,11 @@
 import cheerio from 'cheerio'
 
-import MetaImageScraper from './scraper/metaImageScraper'
-import MetaDescriptionScraper from './scraper/metaDescriptionScraper'
-import MetaTitleScraper from './scraper/metaTitleScraper'
-import MetaFaviconScraper from './scraper/metaFaviconScraper'
+import MetaImageScraper from './scraper/imageScraper'
+import DescriptionScraper from './scraper/descriptionScraper'
+import MetaTitleScraper from './scraper/titleScraper'
+import FaviconScraper from './scraper/faviconScraper'
+import FallbackImageScraper from './scraper/fallbackImageScraper'
+import config from './config'
 
 type Metadata = {
   title?: string
@@ -18,7 +20,7 @@ export class PageMetaScraper {
   private fetcher: Function
   private page: any
 
-  public constructor(url: string, keywords: string[], fetcher: Function = fetch) {
+  public constructor(url: string, keywords: string[], fetcher: Function) {
     this.url = url
     this.keywords = keywords
     this.fetcher = fetcher
@@ -51,7 +53,13 @@ export class PageMetaScraper {
   }
 
   private async images() {
-    return await new MetaImageScraper(this.page, this.url, this.keywords).images()
+    const images = await new MetaImageScraper(this.page, this.url).images()
+
+    if (images.length > 0) return images
+
+    if (config.useFallbackImages) return await new FallbackImageScraper(this.keywords).images()
+
+    return []
   }
 
   private title(): string | undefined {
@@ -59,10 +67,10 @@ export class PageMetaScraper {
   }
 
   private favicon(): string | undefined {
-    return new MetaFaviconScraper(this.page).favicon()
+    return new FaviconScraper(this.page).favicon()
   }
 
   private description(): string | undefined {
-    return new MetaDescriptionScraper(this.page, this.url, 300).description()
+    return new DescriptionScraper(this.page, this.url, 300).description()
   }
 }

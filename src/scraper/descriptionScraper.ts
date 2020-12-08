@@ -1,6 +1,6 @@
 import { getContent, getText } from '../utils/helper'
 
-export default class MetaDescriptionScraper {
+export default class DescriptionScraper {
   private page: any
   private url: string
   private truncateLength: number

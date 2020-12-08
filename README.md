@@ -40,20 +40,42 @@ const metadata = async () => pageMetaScraper.scrape(url)
 Since some pages don't show any images, [ContextualWeb Image Search API](https://contextualweb.io/image-search-api/) and [Unsplash Image API](https://unsplash.com/developers) can be used as fallback strategies. Both strategies have to be configured and keywords have to be provided to search for images:
 
 ```javascript
+import pageMetaScraper from 'page-meta-scraper'
+
 pageMetaScraper.configure({
+  useFallbackImages: true,
+  imageFallbackStrategies: ['contextualweb', 'unsplash'],
+
+  unsplashBaseUrl: 'URL',
+  unsplashClientId: 'URL',
+  xRapidapiHost: 'HOST',
+  xRapidapiKey: 'KEY',
+})
+
+const url = 'https://example.com'
+const keywords = ['example', 'key', 'words']
+
+const metadata = await pageMetaScraper.scrape(url, keywords)
+```
+
+The fallback images can also be used by themself:
+
+```javascript
+import pageMetaScraper from 'page-meta-scraper'
+
+pageMetaScraper.configure({
+  useFallbackImages: true,
   imageFallbackStrategies: ['contextualweb', 'unsplash'],
 
   unsplashBaseUrl: '',
   unsplashClientId: '',
   xRapidapiHost: '',
   xRapidapiKey: '',
-  imageSearchBaseUrl: '',
 })
 
-const url = 'https://example.com'
 const keywords = ['example', 'key', 'words']
 
-const metadata = async () => pageMetaScraper.scrape(url, keywords)
+const imageUrls = await pageMetaScraper.fallbackImages(keywords)
 ```
 
 **ContextualWeb Image Search API**

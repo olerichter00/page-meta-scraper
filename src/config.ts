@@ -1,24 +1,28 @@
-export type ImageFallbackStrategy = 'contextualweb' | 'unsplash'
-
 export type Config = {
-  imageFallbackStrategies: ImageFallbackStrategy[]
+  useFallbackImages: boolean
+  imageFallbackStrategies: string[]
 
+  imageSearchBaseUrl: string
   unsplashBaseUrl: string
   unsplashClientId: string
   xRapidapiHost: string
   xRapidapiKey: string
-  imageSearchBaseUrl: string
+
+  debugMode: boolean
 }
 
 const config: Config = {
+  useFallbackImages: false,
   imageFallbackStrategies: [],
 
-  unsplashBaseUrl: '',
-  unsplashClientId: '',
   imageSearchBaseUrl:
     'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI',
+  unsplashBaseUrl: '',
+  unsplashClientId: '',
   xRapidapiHost: '',
   xRapidapiKey: '',
+
+  debugMode: false,
 }
 
 export default config

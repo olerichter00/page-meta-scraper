@@ -1,6 +1,8 @@
 import { getHref } from '../utils/helper'
 
-export default class MetaFaviconScraper {
+type SelectorStrategy = [string, (page: cheerio.Root, selector: string) => string | undefined]
+
+export default class FaviconScraper {
   private page: any
 
   public constructor(page: string) {
@@ -16,7 +18,5 @@ export default class MetaFaviconScraper {
     return favicons[0]
   }
 
-  private strategies: [string, (page: cheerio.Root, selector: string) => string | undefined][] = [
-    ["link[rel='icon']", getHref],
-  ]
+  private strategies: SelectorStrategy[] = [["link[rel='icon']", getHref]]
 }

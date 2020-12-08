@@ -1,5 +1,3 @@
-const MAX_TEXT_LENGTH = 300
-
 export const getContent = (page: cheerio.Root, selector: string) => page(selector).attr('content')
 
 export const getSrc = (page: cheerio.Root, selector: string) => {

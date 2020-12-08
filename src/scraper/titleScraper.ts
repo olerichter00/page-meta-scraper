@@ -1,5 +1,7 @@
 import { getContent, getText } from '../utils/helper'
 
+type SelectorStrategy = [string, (page: cheerio.Root, selector: string) => string | undefined]
+
 export default class MetaTitleScraper {
   private page: any
 
@@ -16,7 +18,7 @@ export default class MetaTitleScraper {
     return title[0]
   }
 
-  private strategies: [string, (page: cheerio.Root, selector: string) => string | undefined][] = [
+  private strategies: SelectorStrategy[] = [
     ["meta[property='og:title']", getContent],
     ['title', getText],
   ]

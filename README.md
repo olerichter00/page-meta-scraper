@@ -5,6 +5,7 @@
 **pageMetaScraper** is a library to scrape metadata from any page. It scrapes Open Graph metadata, regular HTML metadata and uses text and images from the page as well as images from several image search apis as fallback.
 
 [![DeepSource](https://deepsource.io/gh/olerichter00/page-meta-scraper.svg/?label=active+issues)](https://deepsource.io/gh/olerichter00/page-meta-scraper/?ref=repository-badge)
+[![DeepScan grade](https://deepscan.io/api/teams/11955/projects/15036/branches/294268/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11955&pid=15036&bid=294268)
 
 ## Install
 

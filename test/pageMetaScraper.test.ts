@@ -4,8 +4,8 @@ import pageMetaScraper from '../src'
 import FallbackImageScraper from '../src/scraper/fallbackImageScraper'
 import config from '../src/config'
 
-const fetchMock = () => ({
-  text: async (_: string) => fs.readFileSync(testFile),
+const fetchMock = async (_: RequestInfo) => ({
+  text: async () => fs.readFileSync(testFile),
 })
 
 let testFile = ''
@@ -27,6 +27,7 @@ describe('configuration', () => {
       unsplashClientId: 'a-client-id',
       xRapidapiHost: 'a-host',
       xRapidapiKey: 'a-key',
+      debugMode: false,
     }
 
     pageMetaScraper.configure(manualConfig)

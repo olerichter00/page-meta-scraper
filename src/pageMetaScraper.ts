@@ -17,10 +17,14 @@ type Metadata = {
 export class PageMetaScraper {
   private url: string
   private keywords: string[]
-  private fetcher: Function
+  private fetcher: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>
   private page: any
 
-  public constructor(url: string, keywords: string[], fetcher: Function) {
+  public constructor(
+    url: string,
+    keywords: string[],
+    fetcher: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>,
+  ) {
     this.url = url
     this.keywords = keywords
     this.fetcher = fetcher

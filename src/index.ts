@@ -6,7 +6,11 @@ export const configure = (params: Partial<Config>) => {
   Object.assign(config, params)
 }
 
-export const scrape = async (url: string, keywords: string[] = [], fetcher: Function = fetch) => {
+export const scrape = async (
+  url: string,
+  keywords: string[] = [],
+  fetcher: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any> = fetch,
+) => {
   const metadataScraper = new PageMetaScraper(url, keywords, fetcher)
 
   await metadataScraper.loadPage()

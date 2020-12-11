@@ -4,6 +4,8 @@
 
 **pageMetaScraper** is a library to scrape metadata from any page. It scrapes Open Graph metadata, regular HTML metadata and uses text and images from the page as well as images from several image search apis as fallback.
 
+[![DeepSource](https://deepsource.io/gh/olerichter00/page-meta-scraper.svg/?label=active+issues)](https://deepsource.io/gh/olerichter00/page-meta-scraper/?ref=repository-badge)
+
 ## Install
 
 Install with NPM:

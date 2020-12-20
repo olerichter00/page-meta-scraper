@@ -13,7 +13,7 @@
     "scraper"
   ],
   "author": "Ole Richter <ole.richter91@gmail.com>",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "dist/index.js",
   "umd:main": "dist/page-meta-scraper.umd.production.js",
   "module": "dist/page-meta-scraper.esm.js",

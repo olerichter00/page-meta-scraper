@@ -4,11 +4,13 @@
 
 **pageMetaScraper** is a library to scrape metadata from any page. It scrapes Open Graph metadata, regular HTML metadata and uses text and images from the page as well as images from several image search apis as fallback.
 
-
 ![CI status](https://github.com/olerichter00/page-meta-scraper/workflows/CI/badge.svg)
 [![DeepSource](https://deepsource.io/gh/olerichter00/page-meta-scraper.svg/?label=active+issues)](https://deepsource.io/gh/olerichter00/page-meta-scraper/?ref=repository-badge)
 [![DeepScan grade](https://deepscan.io/api/teams/11955/projects/15036/branches/294268/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=11955&pid=15036&bid=294268)
 [![npm version](https://badge.fury.io/js/page-meta-scraper.svg)](https://badge.fury.io/js/page-meta-scraper)
+
+[![](https://img.shields.io/badge/-Edit on Observable-blue?style=for-the-badge)](https://observablehq.com/@olerichter00/pagemetascraper)
+
 ## Install
 
 Install with NPM:
@@ -30,7 +32,7 @@ import pageMetaScraper from 'page-meta-scraper'
 
 const url = 'https://example.com'
 
-const metadata = async () => pageMetaScraper.scrape(url)
+const metadata = await pageMetaScraper.scrape(url)
 
 // {
 //   title: 'page title',

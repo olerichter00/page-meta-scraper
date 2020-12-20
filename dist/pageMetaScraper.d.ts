@@ -9,7 +9,7 @@ export declare class PageMetaScraper {
     private keywords;
     private fetcher;
     private page;
-    constructor(url: string, keywords: string[], fetcher: Function);
+    constructor(url: string, keywords: string[], fetcher: (input: RequestInfo, init?: RequestInit | undefined) => Promise<any>);
     loadPage(): Promise<void>;
     scrape(): Promise<Metadata>;
     private images;

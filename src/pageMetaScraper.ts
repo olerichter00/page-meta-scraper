@@ -37,7 +37,7 @@ export class PageMetaScraper {
       this.page = cheerio.load(html, {
         xmlMode: true,
         normalizeWhitespace: true,
-        decodeEntities: true,
+        decodeEntities: false,
       })
     } catch (error) {}
   }
